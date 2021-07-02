@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Welcome to ABB
+{% endblock %}
+
+{% block content%}
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md3 text-center bg-grey" style="color:white">
+        <br>
+            <img src="https://www07.abb.com/images/librariesprovider131/default-album/flexloader-sc-3000-web.jpg?sfvrsn=32a2b708_1"
+                 alt="FlexLoader SC 3000" width="1280" height="640">
+        <div class="col-md-5 p-lg-5 mx-auto my-1">
+            <h1 class="display-3 font-weight-normal">Welcome to ABB Project</h1>
+            <h3 class="display-4 font-weight-normal">FlexLoader Vision</h3>
+            <br>
+            <p class="lead font-weight-normal"><h4>Start setting the vision by clicking the button below</h4></p>
+            <br>
+            <a class="btn btn-success" href="{{ url_for('workspace_page') }}"><h4 class="center">Get Started</h4></a>
+        </div>
+        <div class="product-device box-shadow d-none d-md-block"></div>
+        <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+    </div>
+{% endblock %}

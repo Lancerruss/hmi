@@ -1,0 +1,543 @@
+<style xmlns="http://www.w3.org/1999/html">
+    .slidecontainer {
+      width: 100%;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 25px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider:hover {
+      opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: #04AA6D;
+      cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      background: #04AA6D;
+      cursor: pointer;
+    }
+</style>
+
+<style>
+    #camera{
+     width: 860px;
+     height: 480px;
+     border: 1px solid black;
+    }
+    #camera_1{
+     width: 860px;
+     height: 480px;
+     border: 1px solid black;
+    }
+    #camera_2{
+     width: 860px;
+     height: 480px;
+     border: 1px solid black;
+    }
+</style>
+
+{% extends 'base.html' %}
+
+{% block title %}
+    FlexLoader Vision Tools
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <br>
+<!--Nav Bar-->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a href="#detail" class="nav-link active" role="tab" data-toggle="tab">
+                    <h3>Detail</h3>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#image" class="nav-link" role="tab" data-toggle="tab">
+                    <h3>Image</h3>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#positions" class="nav-link" role="tab" data-toggle="tab">
+                    <h3>Positions</h3>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#parameters" class="nav-link" role="tab" data-toggle="tab">
+                    <h3>Parameters</h3>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#tool" class="nav-link" role="tab" data-toggle="tab">
+                    <h3>Tool</h3>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#grip" class="nav-link" role="tab" data-toggle="tab">
+                    <h3>Grip</h3>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#supervision" class="nav-link" role="tab" data-toggle="tab">
+                    <h3>Supervision</h3>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#mechanics" class="nav-link" role="tab" data-toggle="tab">
+                    <h3>Mechanics</h3>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#test" class="nav-link" role="tab" data-toggle="tab">
+                    <h3>Test</h3>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#save" class="nav-link" role="tab" data-toggle="tab">
+                    <h3>Save</h3>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#execute" class="nav-link" role="tab" data-toggle="tab">
+                    <h3>Execute</h3>
+                </a>
+            </li>
+        </ul>
+<!--Tabs-->
+        <div class="tab-content">
+<!--Detail-->
+            <div role="tabpanel" class="tab-pane active" id="detail">
+                <br>
+                 <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-2 bg-gray" style="height: 400px">
+                        <br>
+                        <h1>Database</h1>
+                        <h4>+ Workpieces</h4>
+                        <br>
+                    </div>
+
+                    <div class="col-4 bg-dark" style="height: 400px" >
+                        <br>
+                        <h1>Detail Creator</h1>
+                        <div class="row">
+                            <form style="margin-top: 20px; margin-left: 20px">
+                                  <div class="mb-3">
+                                    <label class="form-label"><h4>Group Name</h4></label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <div class="form-text">Fill in object group name</div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label class="form-label"><h4>Object Name</h4></label>
+                                    <input type="text" class="form-control">
+                                  </div>
+                                  <button type="submit" class="btn btn-primary"><h4>Save</h4></button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+<!--Image-->
+            <div role="tabpanel" class="tab-pane fade" id="image">
+                <br>
+                <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-8 justify-content-center bg-dark" style="height: 710px" >
+                        <br>
+                        <h1 class="row justify-content-center">Import Object Image</h1>
+                        <br>
+                        <div class="row" style="margin-top: 5px; margin-left: 5px">
+                            <div class="col-6">
+                                <h2>Live Webcam</h2>
+                                <div id="camera"></div>
+                            </div>
+                            <div class="col-6">
+                                <h2>Objects Snap</h2>
+                                <div id="result"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <button  class="btn btn-info" onclick="take_snapshot()"><h5>Take Snapshot</h5></button>
+                    </div>
+                    <div class="col-1 bg-gray" style="height: 710px" >
+                    </div>
+                    <div class="col-2 bg-gray" style="height: 710px" >
+                        <div>
+                            <br>
+                            <h1 class="row justify-content-center">&ensp; Image Settings</h1>
+                            <br>
+                            <div class="slidecontainer">
+                                <h3>Exposure time</h3>
+                                <input type="range" min="0" max="255" value="0" class="slider" id="myRange">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="slidecontainer">
+                                <h3>Contrast</h3>
+                                <input type="range" min="0" max="255" value="0" class="slider" id="myRange">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="slidecontainer">
+                                <h3>Gain</h3>
+                                <input type="range" min="0" max="255" value="0" class="slider" id="myRange">
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--Positions-->
+            <div role="tabpanel" class="tab-pane fade" id="positions">
+                <br>
+                <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-8">
+                        <h1>Object Capture</h1>
+                        <br>
+                    </div>
+                    <div class="col-4 justify-content-center" style="background-color: gray; height: 900px" >
+                        <br>
+                        <h2 class="row justify-content-center">
+                            <div class="btn-group-vertical">
+                                <h1>Current Position</h1>
+                                <br>
+                                <br>
+                                <a class="btn btn-light"><h4>New Position</h4></a>
+                                <br>
+                                <br>
+                                <a class="btn btn-light"><h4>Delete Position</h4></a>
+                                <br>
+                                <br>
+                                <a class="btn btn-light"><h4>Crop Position</h4></a>
+                                <br>
+                                <br>
+                                <a class="btn btn-light"><h4>New Image</h4></a>
+                            </div>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+<!--Parameters-->
+            <div role="tabpanel" class="tab-pane fade" id="parameters">
+                <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-8">
+                        <br>
+                        <h1>Parameters</h1>
+                        <h5>Display the window of object to filter out the ignore features</h5>
+                        <br>
+                    </div>
+                    <div class="col-4 justify-content-center" style="background-color: gray; height: 900px" >
+                        <br>
+                        <h2 class="row justify-content-center align-middle center">
+                            <div class="btn-group-vertical align-middle">
+                                <h1>Don't Care Regions</h1>
+                                <br>
+                                <br>
+                                <h5 class="justify-content-center align-middle center">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                    Edit
+                                    &ensp;
+                                    &ensp;
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                    Outer Contour
+                                </h5>
+                                <br>
+                                <div>
+                                    <a class="btn btn-light center" style="width:150px"><h5>Clear</h5></a>
+                                    &ensp;
+                                    <a class="btn btn-light center" style="width:150px"><h5>Suggest</h5></a>
+                                </div>
+                            </div>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+<!--Tool-->
+            <div role="tabpanel" class="tab-pane fade" id="tool">
+                <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-8">
+                        <br>
+                        <h1>Tool</h1>
+                        <h5>Display the window of setting the gripper</h5>
+                        <br>
+                    </div>
+                    <div class="col-4 justify-content-center" style="background-color: gray; height: 900px" >
+                        <br>
+                        <h4 class="row justify-content-center">
+                            <div class="btn-group-vertical align-middle">
+                                <h1 class="row justify-content-center">Tool Setting</h1>
+                                <div>
+                                    <hr style="height:5px; border-width:5px; background-color:black">
+                                </div>
+                                <h3 >Select tool</h3>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Select gripper</option>
+                                    <option value="1">Gripper 1 [2 finger]</option>
+                                    <option value="2">Gripper 2 [3 finger]</option>
+                                    <option value="3">Gripper 2 [4 finger]</option>
+                                    <option value="4">Gripper 1 [2 finger] rotated</option>
+                                    <option value="5">Gripper 2 [3 finger] rotated</option>
+                                    <option value="6">Gripper 2 [4 finger] rotated</option>
+                                </select>
+                                <br>
+                                <br>
+                                <div>
+                                    <a class="btn btn-light center" style="width:150px"><h5>New</h5></a>
+                                    &ensp; &ensp; &ensp;
+                                    <a class="btn btn-light center" style="width:150px"><h5>Edit</h5></a>
+                                </div>
+                                <br>
+                                <br>
+                                <div>
+                                    A[mm/&#176;] &ensp; &ensp; &ensp; <input style="width:100px right" type="number"/>
+                                </div>
+                                <br>
+                                <br>
+                                <div>
+                                    B[mm/&#176;] &ensp; &ensp; &ensp; <input style="width:100px right" type="number"/>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <div>
+                                    C[mm/&#176;] &ensp; &ensp; &ensp; <input style="width:100px right" type="number"/>
+                                </div>
+                                <br>
+                                <br>
+                                <div>
+                                    D[mm/&#176;] &ensp; &ensp; &ensp; <input style="width:100px right" type="number"/>
+                                </div>
+                                <br>
+                                <br>
+                                <div>
+                                    <a class="btn btn-success justified-center" style="width:150px"><h5>Save</h5></a>
+                                </div>
+                            </div>
+                        </h4>
+
+                    </div>
+                </div>
+            </div>
+<!--Grip-->
+            <div role="tabpanel" class="tab-pane fade" id="grip">
+                <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-8 justify-content-center" style="background-color: dark; height: 1000px">
+                        <br>
+                        <h1>Grip</h1>
+                        <h5>Display the window of model object to locate the gripper</h5>
+                        <br>
+                    </div>
+                    <div class="col-4 justify-content-center" style="background-color: gray; height: 1000px" >
+                        <br>
+                        <h4 class="row justify-content-center align-middle center">
+                            <div class="btn-group-vertical align-middle">
+                                <div>
+                                    <h1 class="row justify-content-center">Grip Settings</h1>
+                                    <br>
+                                    <div class="justify-content-center">
+                                        X [mm] &ensp; &ensp;<input style="width:100px right" type="number"/>
+                                    </div>
+                                    <div>
+                                        Y [mm] &ensp; &ensp;<input style="width:100px right" type="number"/>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <a class="btn btn-light center" style="width:120px"><h5><b>&#8592;</b></h5></a>
+                                        <div class="btn-group-vertical">
+                                            <a class="btn btn-light center" style="width:120px"><h5><b>&#8593;</b></h5></a>
+                                            <a class="btn btn-light center" style="width:120px"><h5><b>&#8595;</b></h5></a>
+                                        </div>
+                                        <a class="btn btn-light center" style="width:120px"><h5><b>&#8594;</b></h5></a>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <a class="btn btn-light" style="width:80px"><h5><b>&#8634;</b></h5></a>
+                                        &ensp;
+                                        Back
+                                    </div>
+                                    <br>
+                                    <table style="width:100%">
+                                        <tr>
+                                            <th><h4>Rot. X[&#176;]</h4></th>
+                                            <th><h4>Rot. y[&#176;]</h4></th>
+                                            <th><h4>Rot. Z[&#176;]</h4></th>
+                                        </tr>
+                                        <tr class="center">
+                                            <td><a class="btn btn-light center" style="width:120px"><h5><b>&#8593;</b></h5></a></td>
+                                            <td><a class="btn btn-light center" style="width:120px"><h5><b>&#8593;</b></h5></a></td>
+                                            <td><a class="btn btn-light center" style="width:120px"><h5><b>&#8593;</b></h5></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input style="width:120px; height:50px" type="number"/></td>
+                                            <td><input style="width:120px; height:50px" type="number"/></td>
+                                            <td><input style="width:120px; height:50px" type="number"/></td>
+                                        </tr>
+                                        <tr class="center">
+                                            <td><a class="btn btn-light center" style="width:120px"><h5><b>&#8595;</b></h5></a></td>
+                                            <td><a class="btn btn-light center" style="width:120px"><h5><b>&#8595;</b></h5></a></td>
+                                            <td><a class="btn btn-light center" style="width:120px"><h5><b>&#8595;</b></h5></a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br>
+                                <div>
+                                    <h1 class="row justify-content-center">Height Settings</h1>
+                                    <br>
+                                    <div>
+                                        Edge height [mm] &ensp; &ensp;<input style="width:100px right" type="number"/>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        Pos. height [mm] &ensp; &ensp; <input style="width:100px right" type="number"/>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        Grip height [mm] &ensp; &ensp; <input style="width:100px right" type="number"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <hr style="height:5px; border-width:5px; background-color:black">
+                                </div>
+
+                                <div>
+                                    <a class="btn btn-success justified-center" style="width:150px"><h5>Save</h5></a>
+                                </div>
+                            </div>
+                        </h4>
+
+                    </div>
+                </div>
+            </div>
+<!--Supervision-->
+            <div role="tabpanel" class="tab-pane fade" id="supervision">
+                <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-8">
+                        <br>
+                        <h1>Supervision</h1>
+                        <p>Display the window for object analysing</p>
+                        <br>
+                    </div>
+                    <div class="col-4" style="background-color: gray; height: 900px" >
+                        <br>
+                        <h1>Tools Space Here</h1>
+                        <p>The tool space for each tab will be display here</p>
+                    </div>
+                </div>
+            </div>
+<!--Mechanics-->
+            <div role="tabpanel" class="tab-pane fade" id="mechanics">
+                <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-8">
+                        <br>
+                        <h1>Mechanics</h1>
+                        <p>Display the window for object analysing</p>
+                        <br>
+                    </div>
+                    <div class="col-4" style="background-color: gray; height: 900px" >
+                        <br>
+                        <h1>Tools Space Here</h1>
+                        <p>The tool space for each tab will be display here</p>
+                    </div>
+                </div>
+            </div>
+<!--Test-->
+            <div role="tabpanel" class="tab-pane" id="test">
+                <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-8">
+                        <br>
+                        <h1>Test</h1>
+                        <br>
+                        <h4>Display the stream video from webcam and testing with virtual gripper</h4>
+                        <br>
+                        <div>
+                            <br>
+                            <div class="row" style="margin-top: 5px; margin-left: 5px">
+                            <div class="col-6">
+<!--                                <h2>Live Webcam</h2>-->
+<!--                                <div id="camera_1"></div>-->
+                            </div>
+<!--                            <div class="col-6">-->
+<!--                                <h2>Objects Snap</h2>-->
+<!--                                <div id="result_1"></div>-->
+<!--                            </div>-->
+                        </div>
+                        <br>
+<!--                        <button  class="btn btn-info" onclick="take_snapshot()"><h5>Take Snapshot</h5></button>-->
+                        </div>
+                    </div>
+                    <div class="col-4 justify-content-center" style="background-color: gray; height: 900px" >
+                        <br>
+                        <h1 class="row justify-content-center">Operations</h1>
+                        <br>
+                    </div>
+                </div>
+            </div>
+<!--Save-->
+            <div role="tabpanel" class="tab-pane" id="save">
+                <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-8">
+                        <br>
+                        <h1>Save</h1>
+                        <br>
+                        <h4>Display the stream video from webcam and testing with virtual gripper</h4>
+                        <br>
+                    </div>
+                    <div class="col-4 justify-content-center" style="background-color: gray; height: 900px" >
+                        <br>
+                        <h2 class="row justify-content-center">Operations</h2>
+                        <br>
+                    </div>
+                </div>
+            </div>
+<!--Execute-->
+            <div role="tabpanel" class="tab-pane" id="execute">
+                <div class="row" style="margin-top: 20px; margin-left: 20px">
+                    <div class="col-8">
+                        <br>
+                        <h1>Execute</h1>
+                        <br>
+                        <h4>Display the stream video from webcam and testing with virtual gripper</h4>
+                        <br>
+                    </div>
+                    <div class="col-4 justify-content-center" style="background-color: gray; height: 900px" >
+                        <br>
+                        <h2 class="row justify-content-center">Operations</h2>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--Back & Next-->
+        <div>
+            <div class="row justify-content-center" style="margin-top: 20px; margin-left: 20px">
+                <div class="col-3">
+                </div>
+                <br>
+                <div class="col-3 justify-content-center">
+                    <a class="btn btn-danger" href="{{ url_for('home_page') }}"><h5>Cancel</h5></a>
+                    <a type="button" class="btn btn-success"><h5>&#8920; Back</h5></a>
+                    <a type="button" class="btn btn-success"><h5>Next &#8921;</h5></a>
+                </div>
+                <div class="col-3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
